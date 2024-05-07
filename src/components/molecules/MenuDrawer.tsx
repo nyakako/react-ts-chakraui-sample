@@ -23,18 +23,25 @@ export const MenuDrawer: FC<Props> = memo((props) => {
 		onClickUserManagement,
 		onClickSetting,
 	} = props;
+
+	const handleItemClick = (onClickFunction: () => void) => {
+		return () => {
+			onClickFunction();
+			onClose();
+		};
+	};
 	return (
 		<Drawer placement="left" size="xs" onClose={onClose} isOpen={isOpen}>
 			<DrawerOverlay>
 				<DrawerContent>
 					<DrawerBody p={0} bg="gray.100">
-						<Button w="100%" onClick={onClickHome}>
+						<Button w="100%" onClick={handleItemClick(onClickHome)}>
 							TOP
 						</Button>
-						<Button w="100%" onClick={onClickUserManagement}>
+						<Button w="100%" onClick={handleItemClick(onClickUserManagement)}>
 							ユーザー一覧
 						</Button>
-						<Button w="100%" onClick={onClickSetting}>
+						<Button w="100%" onClick={handleItemClick(onClickSetting)}>
 							設定
 						</Button>
 					</DrawerBody>
